@@ -1,5 +1,10 @@
 # Kuro
 
+## Free browser editor
+
+Try [Kuro in SFE Kit](https://starkfiber.my/kit/tools): resize, crop, rotate, flip, adjust brightness/contrast and export PNG, JPEG or WebP without uploading your image. See [KURO-WEB.md](KURO-WEB.md) for the React integration and verified limits. Existing Python tools remain below.
+
+
 Small OpenCV image-augmentation experiments, maintained by [Stark Fiber Enterprise](https://starkfiber.my).
 
 ## Try the image demo
@@ -27,3 +32,4 @@ The regression suite covers non-square image dimensions, zero-sized zoom samples
 Add labelled dataset provenance, deterministic augmentation seeds and measured model evaluation before introducing classification claims. Keep training images and model weights out of commits unless their redistribution rights are known.
 
 See [LICENSE](LICENSE). Original attribution in the source is preserved.
+

@@ -1,11 +1,7 @@
 #MIT License
 #Project initiated by Avaelon Technologies Sdn. Bhd. & Ilangkhumanan Thirunavokkarasu
 
-import pandas as pd
 import numpy as np
-import plotly as plt
-import matplotlib as mpl
-import tensorflow as tf
 
 # -*- coding: utf-8 -*-
 """ 
@@ -17,19 +13,19 @@ Created on 8/10/2021 9:51 PM
 import random
 
 import cv2
-import splitfolders
 
 
 def split_train_val_test(input_path, output_path, ratio):
     '''This function to split data from class folder, if train,
     val ratio just(x,y)'''
+    import splitfolders
     splitfolders.ratio(input_path, output_path, seed=1337, ratio=ratio)
 
 
 def fill(img, h, w):
     '''This function to resize image'''
 
-    img = cv2.resize(img, (h, w), cv2.INTER_CUBIC)
+    img = cv2.resize(img, (w, h), interpolation=cv2.INTER_CUBIC)
     return img
 
 
@@ -90,8 +86,8 @@ def zoom(img, value):
         return img
     value = random.uniform(value, 1)
     h, w = img.shape[:2]
-    h_taken = int(value * h)
-    w_taken = int(value * w)
+    h_taken = max(1, int(value * h))
+    w_taken = max(1, int(value * w))
     h_start = random.randint(0, h - h_taken)
     w_start = random.randint(0, w - w_taken)
     img = img[h_start:h_start + h_taken, w_start:w_start + w_taken, :]
@@ -103,10 +99,7 @@ def channel_shift(img, value):
     '''This function to apply channel shift method'''
 
     value = int(random.uniform(-value, value))
-    img = img + value
-    img[:, :, :][img[:, :, :] > 255] = 255
-    img[:, :, :][img[:, :, :] < 0] = 0
-    img = img.astype(np.uint8)
+    img = np.clip(img.astype(np.float64) + value, 0, 255).astype(np.uint8)
     return img
 
 
